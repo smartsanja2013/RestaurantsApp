@@ -213,10 +213,9 @@ extension MapViewController {
             
             // call api
             networkManager.fetchRestaurants(near: coordinate, radius: Constants.Search_Radius) { restaurants in
-                //
                 guard restaurants.count > 0 else {
-                    // show generic error
-                    self.showDistructiveAlert(title:"", message:Constants.Generic_Error_Message, buttonText:Constants.Generic_Ok)
+                    // no restaurants found. show generic message to user
+                    self.showDistructiveAlert(title:"", message:Constants.No_Restaurants_Message, buttonText:Constants.Generic_Ok)
                     self.hud.dismiss()
                     return
                 }
@@ -310,10 +309,10 @@ extension MapViewController: MKMapViewDelegate {
         var circleRenderer = MKCircleRenderer()
         if let overlay = overlay as? MKCircle {
             circleRenderer = MKCircleRenderer(circle: overlay)
-            circleRenderer.fillColor = UIColor.yellow
-            circleRenderer.strokeColor = .gray
+            circleRenderer.fillColor = UIColor(named: Constants.BrandColors.SecondaryColor)
+            circleRenderer.strokeColor = UIColor(named: Constants.BrandColors.SecondaryTextColor)
             circleRenderer.lineWidth = 0.1
-            circleRenderer.alpha = 0.1
+            circleRenderer.alpha = 0.3
             
         }
         return circleRenderer

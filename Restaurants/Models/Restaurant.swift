@@ -13,8 +13,10 @@ struct Restaurant: Codable {
   let name: String
   let address: String
   let types: [String]
-  
+  let permanently_closed: Bool?
   private let geometry: Gemoetry
+  private let opening_hours: OpenningHours?
+  
   var coordinate: CLLocationCoordinate2D {
     return CLLocationCoordinate2D(latitude: geometry.location.lat, longitude: geometry.location.lng)
   }
@@ -24,6 +26,8 @@ struct Restaurant: Codable {
     case address = "vicinity"
     case types
     case geometry
+    case opening_hours
+    case permanently_closed
   }
 }
 
@@ -35,6 +39,10 @@ extension Restaurant {
   
   private struct Gemoetry: Codable {
     let location: Coordinate
+  }
+
+  private struct OpenningHours: Codable {
+    let open_now: Bool
   }
   
   private struct Coordinate: Codable {

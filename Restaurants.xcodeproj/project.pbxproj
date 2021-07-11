@@ -30,6 +30,8 @@
 		A2BCBB4B26999B25007CC55E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BCBB4A26999B24007CC55E /* AlertManager.swift */; };
 		A2BCBC282699FF27007CC55E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2BCBC272699FF27007CC55E /* GoogleService-Info.plist */; };
 		A2BCBC58269A056F007CC55E /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BCBC57269A056F007CC55E /* AnalyticsManager.swift */; };
+		A2D8F655269B22E6008BFD13 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D8F654269B22E5008BFD13 /* FirebaseAuthManager.swift */; };
+		A2D8F65A269B242D008BFD13 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D8F659269B242D008BFD13 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		A2BCBB4A26999B24007CC55E /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		A2BCBC272699FF27007CC55E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A2BCBC57269A056F007CC55E /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		A2D8F654269B22E5008BFD13 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		A2D8F659269B242D008BFD13 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		B98B021A74C5AF11FDCF6304 /* Pods-Restaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurants.debug.xcconfig"; path = "Target Support Files/Pods-Restaurants/Pods-Restaurants.debug.xcconfig"; sourceTree = "<group>"; };
 		DBE2B2E972645A5D6FEB18CE /* Pods_RestaurantsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD471D6215A51AFB7C4C18E /* Pods-Restaurants-RestaurantsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurants-RestaurantsUITests.release.xcconfig"; path = "Target Support Files/Pods-Restaurants-RestaurantsUITests/Pods-Restaurants-RestaurantsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BCBACA2695E0EB007CC55E /* NetworkManager.swift */,
+				A2D8F654269B22E5008BFD13 /* FirebaseAuthManager.swift */,
 				A2BCBB4A26999B24007CC55E /* AlertManager.swift */,
 				A2BCBC57269A056F007CC55E /* AnalyticsManager.swift */,
 			);
@@ -217,6 +222,7 @@
 			children = (
 				A2BCBAE42695E50C007CC55E /* Restaurant.swift */,
 				A2BCBB002695F732007CC55E /* Annotation.swift */,
+				A2D8F659269B242D008BFD13 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				A2BCBAD72695E219007CC55E /* Constants.swift in Sources */,
 				A2BCBADF2695E226007CC55E /* Reachability.swift in Sources */,
 				A2BCBAAD26949678007CC55E /* LoginViewController.swift in Sources */,
+				A2D8F655269B22E6008BFD13 /* FirebaseAuthManager.swift in Sources */,
 				A2BCBB4B26999B25007CC55E /* AlertManager.swift in Sources */,
 				A2BCBACB2695E0EB007CC55E /* NetworkManager.swift in Sources */,
 				A2BCBB2A26982944007CC55E /* MainNavigationController.swift in Sources */,
@@ -516,6 +523,7 @@
 				A2BCBAB22694968C007CC55E /* RegisterViewController.swift in Sources */,
 				A2BCBA662694890E007CC55E /* SceneDelegate.swift in Sources */,
 				A2BCBB012695F732007CC55E /* Annotation.swift in Sources */,
+				A2D8F65A269B242D008BFD13 /* AuthResponse.swift in Sources */,
 				A2BCBA9726948C87007CC55E /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

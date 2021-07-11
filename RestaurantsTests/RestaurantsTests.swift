@@ -10,24 +10,73 @@ import XCTest
 
 class RestaurantsTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    // test login success
+    func test_LoginManager_WithValidRequest_Returns_LoginData(){
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        // ARRANGE
+        let loginManager = FirebaseAuthManager()
+        let loginExpectations = expectation(description: "WithValidRequest_Returns_LoginData")
+        let email = "test@test.com"
+        let password = "test123"
+        
+        // ACT
+        loginManager.authenticateUser(email:email, password: password) { (loginData) in
+            // ASSERT
+            XCTAssertNotNil(loginData)
+            XCTAssertNil(loginData.errorMessage)
+            XCTAssertEqual(email, loginData.response?.user.email)
+            loginExpectations.fulfill()
         }
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    // test bad email format error
+    func test_LoginManager_WithInValidRequest_Returns_Error(){
+
+        // ARRANGE
+        let loginManager = FirebaseAuthManager()
+        let loginExpectations = expectation(description: "WithInValidRequest_Returns_Error")
+        let email = "test@test"
+        let password = "test123"
+        
+
+        // ACT
+        loginManager.authenticateUser(email:email, password: password) { (loginData) in
+            // ASSERT
+            XCTAssertNotNil(loginData)
+            XCTAssertNil(loginData.response)
+            XCTAssertNotNil(loginData.errorMessage)
+            XCTAssertEqual("The email address is badly formatted.", loginData.errorMessage!)
+
+            loginExpectations.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    // test login fail due to wrong email or password
+    func test_LoginManager_WithValidRequest_Returns_Error(){
+
+        // ARRANGE
+        let loginManager = FirebaseAuthManager()
+        let loginExpectations = expectation(description: "WithInValidRequest_Returns_Error")
+        let email = "test@test.com"
+        let password = "wrongpssword"
+        
+
+        // ACT
+        loginManager.authenticateUser(email:email, password: password) { (loginData) in
+            // ASSERT
+            XCTAssertNotNil(loginData)
+            XCTAssertNil(loginData.response)
+            XCTAssertNotNil(loginData.errorMessage)
+            XCTAssertEqual("The password is invalid or the user does not have a password.", loginData.errorMessage!)
+
+            loginExpectations.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
 }

@@ -18,6 +18,7 @@ class RegisterViewController: UIViewController {
     // loading hud
     let hud = JGProgressHUD()
     
+    private let authManager = FirebaseAuthManager()
     private let analyticsManager = AnalyticskManager()
     
     override func viewDidLoad() {
@@ -37,23 +38,22 @@ class RegisterViewController: UIViewController {
             
             // user registration through firebase
             if let email = txtFldEmail.text, let password = txtFldPassword.text{
-                Auth.auth().createUser(withEmail: email, password: password) { [self] authResult, error in
-                    if let err = error{
-                        print("FirebaseRegistrationError \(err.localizedDescription)")
-                        showDistructiveAlert(title: "", message: err.localizedDescription, buttonText: Constants.Generic_Ok)
+                // register user
+                authManager.registerUser(email: email, password: password) { (AuthResponse) in
+                    self.hud.dismiss()
+                    if let err = AuthResponse.errorMessage {
+                        print("FirebaseRegistrationError \(err)")
+                        self.showDistructiveAlert(title: "", message: err, buttonText: Constants.Generic_Ok)
                     }
-                    else{
+                    else {
                         // update isLoggedIn flag
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        
                         // add signup event in firebase analytics
-                        analyticsManager.addRegisterEvent(email: email)
-                        
+                        self.analyticsManager.addRegisterEvent(email: email)
                         // registration success. navigate to MapViewController
-                        gotoMapViewController()
+                        self.gotoMapViewController()
                     }
                     
-                    hud.dismiss()
                 }
             }
         }

@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 typealias RestaurantsCompletion = ([Restaurant]) -> Void
-typealias PhotoCompletion = (UIImage?) -> Void
 
 class NetworkManager {
     private var photosDictionary: [String: UIImage] = [:]

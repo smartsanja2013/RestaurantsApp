@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Firebase
 import JGProgressHUD
 
 class LoginViewController: UIViewController {
@@ -18,6 +17,7 @@ class LoginViewController: UIViewController {
     // loading hud
     let hud = JGProgressHUD()
     
+    private let authManager = FirebaseAuthManager()
     private let analyticsManager = AnalyticskManager()
     
     override func viewDidLoad() {
@@ -37,23 +37,22 @@ class LoginViewController: UIViewController {
 
             // initiate firebase login
             if let email = txtFldEmail.text, let password = txtFldPassword.text{
-                Auth.auth().signIn(withEmail: email, password: password) { [self] authResult, error in
-                    if let err = error{
-                        print("FirebaseLoginError \(err.localizedDescription)")
-                        showDistructiveAlert(title: "", message: err.localizedDescription, buttonText: Constants.Generic_Ok)
+                // autheticate user
+                authManager.authenticateUser(email: email, password: password) { (AuthResponse) in
+                    self.hud.dismiss()
+                    if let err = AuthResponse.errorMessage {
+                        print("FirebaseLoginError \(err)")
+                        self.showDistructiveAlert(title: "", message: err, buttonText: Constants.Generic_Ok)
                     }
-                    else{
+                    else {
                         // update isLoggedIn flag
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        
                         // add login event in firebase analytics
-                        analyticsManager.addLoginEvent(email: email)
-                        
+                        self.analyticsManager.addLoginEvent(email: email)
                         // login success. go to MapViewController
-                        gotoMapViewController()
+                        self.gotoMapViewController()
                     }
                     
-                    hud.dismiss()
                 }
             }
         }
