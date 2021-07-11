@@ -40,4 +40,15 @@ struct FirebaseAuthManager {
             
         }
     }
+    
+    // logout
+    func logout(completionHandler: @escaping(_ loggedOut: Bool)->()) {
+        do {
+            try Auth.auth().signOut()
+            // return error back to the caller
+            completionHandler(true)
+        } catch _ as NSError {
+            completionHandler(false)
+        }
+    }
 }

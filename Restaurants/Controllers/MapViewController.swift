@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import CoreLocation
 import JGProgressHUD
-import Firebase
 
 class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
@@ -23,6 +22,7 @@ class MapViewController: UIViewController {
     private var locationManager : CLLocationManager!
     private var currentLocation: CLLocation?
     private let networkManager = NetworkManager()
+    private let authManager = FirebaseAuthManager()
     var arrAnnotations : [Annotation] = []
     var arrRestaurents : [Restaurant] = []
     var filteredRestaurants = [Restaurant]()
@@ -110,14 +110,16 @@ extension MapViewController {
     
     // logout user
     @IBAction func logoutButtnTapped(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-            // update isLoggedIn flag
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            // go back to WelComeViewController
-            gotoWelComeViewController()
-        } catch let signOutError as NSError {
-            print("Error signing out: \(signOutError.localizedDescription)")
+        authManager.logout { (loggedOut) in
+            if(loggedOut){
+                // update isLoggedIn flag
+                UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                // go back to WelComeViewController
+                self.gotoWelComeViewController()
+            }
+            else{
+                print("Error signing out")
+            }
         }
     }
     
