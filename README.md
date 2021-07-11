@@ -6,5 +6,12 @@ Fetch nearby restaurants based on user location - iOS Swift
 - Retrieve nearby restaurants using Google Place API and Apple Mapkit framwork within radius of 1km based on user current location and custom pinned location
 - Search/Filter list of restaurants
 - Firebase anlytics and Crashlytics integration
+- Unit tests
 
+# System Requirments
+- Xcode 12+
+- Cocoapods
+
+# Build
+- Navigate to project directory and run pod install
 
