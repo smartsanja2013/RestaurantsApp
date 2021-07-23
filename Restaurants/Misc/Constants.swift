@@ -17,7 +17,7 @@ struct Constants {
     static let PLACE_TYPE = "restaurant" // pass the place type as "restaurant" in google places api
     
     // MARK: - Api keys
-    static let GOOGLE_PLACES_APIKEY = "AIzaSyDs8gw6HSWrkSHNNy33zPS_6uY95U_G4eA"
+    static let GOOGLE_PLACES_APIKEY = "<API key>"
     
     // MARK: - Alerts
     static let Generic_Ok = "OK"
